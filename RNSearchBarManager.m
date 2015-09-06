@@ -15,6 +15,16 @@ RCT_EXPORT_MODULE()
   return searchBar;
 }
 
+RCT_EXPORT_METHOD(dismissKeyboard:(NSNumber*) reactTag)
+{
+    RNSearchBar *searchBar = (RNSearchBar *) [self view];
+    RCTLog(@"Search bar I am in you!");
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+            [searchBar resignFirstResponder];
+    });
+}
+
 RCT_EXPORT_VIEW_PROPERTY(placeholder, NSString)
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)
 RCT_EXPORT_VIEW_PROPERTY(showsCancelButton, BOOL)

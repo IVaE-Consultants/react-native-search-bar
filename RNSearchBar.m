@@ -26,22 +26,20 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
   [self setShowsCancelButton:YES animated:YES];
-    
-    
+
+
   [_eventDispatcher sendTextEventWithType:RCTTextEventTypeFocus
                                  reactTag:self.reactTag
-                                     text:searchBar.text
-                            eventCount:_nativeEventCount];
+                                     text:searchBar.text];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     _nativeEventCount++;
-    
+
   [_eventDispatcher sendTextEventWithType:RCTTextEventTypeChange
                                  reactTag:self.reactTag
-                                     text:searchText
-                               eventCount:_nativeEventCount];
+                                     text:searchText];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -51,7 +49,7 @@
                           @"button": @"search",
                           @"searchText": searchBar.text
                           };
-  
+
   [_eventDispatcher sendInputEventWithName:@"topTap" body:event];
 }
 
@@ -61,13 +59,19 @@
   self.text = @"";
   [self resignFirstResponder];
   [self setShowsCancelButton:NO animated:YES];
-  
+
   NSDictionary *event = @{
                           @"target": self.reactTag,
                           @"button": @"cancel"
                           };
-  
+
   [_eventDispatcher sendInputEventWithName:@"topTap" body:event];
+}
+
+RCT_EXPORT_METHOD(dismissKeyboard)
+{
+    NSLog(@"BLUR ME!!");
+  [self resignFirstResponder];
 }
 
 

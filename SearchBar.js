@@ -1,8 +1,10 @@
-var NativeModules, PropTypes, RNSearchBar, React, SearchBar;
+var NativeModules, PropTypes, RNSearchBar, React, SearchBar, findNodeHandle;
 
 React = require('react-native');
 
 RNSearchBar = React.requireNativeComponent('RNSearchBar', null);
+
+findNodeHandle = require('findNodeHandle');
 
 PropTypes = React.PropTypes;
 
@@ -37,8 +39,12 @@ SearchBar = React.createClass({
       return typeof (base1 = this.props).onCancelButtonPress === "function" ? base1.onCancelButtonPress() : void 0;
     }
   },
+  blur: function(e) {
+    return NativeModules.RNSearchBarManager.dismissKeyboard(findNodeHandle(this.refs.theSearchBar));
+  },
   render: function() {
     return <RNSearchBar
+      ref='theSearchBar'
       style={{height: NativeModules.RNSearchBarManager.ComponentHeight}}
       onChange={this._onChange}
       onPress={this._onPress}

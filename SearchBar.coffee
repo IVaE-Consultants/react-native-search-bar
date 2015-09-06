@@ -2,6 +2,8 @@ React = require 'react-native'
 
 RNSearchBar = React.requireNativeComponent 'RNSearchBar', null
 
+findNodeHandle = require 'findNodeHandle'
+
 PropTypes = React.PropTypes
 
 NativeModules = React.NativeModules
@@ -32,9 +34,12 @@ SearchBar = React.createClass
       @props.onSearchButtonPress? e.nativeEvent.searchText
     else if button == 'cancel'
       @props.onCancelButtonPress?()
+  blur: (e) ->
+      NativeModules.RNSearchBarManager.dismissKeyboard(findNodeHandle(@refs.theSearchBar))
 
   render: ->
     `<RNSearchBar
+      ref='theSearchBar'
       style={{height: NativeModules.RNSearchBarManager.ComponentHeight}}
       onChange={this._onChange}
       onPress={this._onPress}
