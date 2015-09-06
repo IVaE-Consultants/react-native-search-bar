@@ -4,6 +4,10 @@
 
 #import "RCTBridge.h"
 
+#import "RCTUIManager.h"
+
+#import "RCTSparseArray.h"
+
 @implementation RNSearchBarManager
 
 RCT_EXPORT_MODULE()
@@ -17,12 +21,15 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(dismissKeyboard:(NSNumber*) reactTag)
 {
-    RNSearchBar *searchBar = (RNSearchBar *) [self view];
-    RCTLog(@"Search bar I am in you!");
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-            [searchBar resignFirstResponder];
-    });
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, RCTSparseArray *viewRegistry) {
+        RCTAssertMainThread();
+
+        RNSearchBar *searchBar = (RNSearchBar *) [viewRegistry objectForKeyedSubscript:reactTag];
+        [searchBar setShowsCancelButton:NO animated:YES];
+        [searchBar resignFirstResponder];
+    }];
+
 }
 
 RCT_EXPORT_VIEW_PROPERTY(placeholder, NSString)

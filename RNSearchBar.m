@@ -68,11 +68,4 @@
   [_eventDispatcher sendInputEventWithName:@"topTap" body:event];
 }
 
-RCT_EXPORT_METHOD(dismissKeyboard)
-{
-    NSLog(@"BLUR ME!!");
-  [self resignFirstResponder];
-}
-
-
 @end
