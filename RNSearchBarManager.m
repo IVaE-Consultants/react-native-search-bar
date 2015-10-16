@@ -19,7 +19,7 @@ RCT_EXPORT_MODULE()
   return searchBar;
 }
 
-RCT_EXPORT_METHOD(dismissKeyboard:(NSNumber*) reactTag)
+RCT_EXPORT_METHOD(dismissKeyboard:(nonnull NSNumber*) reactTag)
 {
 
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, RCTSparseArray *viewRegistry) {
