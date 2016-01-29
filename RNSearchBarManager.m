@@ -6,8 +6,6 @@
 
 #import "RCTUIManager.h"
 
-#import "RCTSparseArray.h"
-
 @implementation RNSearchBarManager
 
 RCT_EXPORT_MODULE()
@@ -22,7 +20,7 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(dismissKeyboard:(NSNumber*) reactTag)
 {
 
-    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, RCTSparseArray *viewRegistry) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary *viewRegistry) {
         RCTAssertMainThread();
 
         RNSearchBar *searchBar = (RNSearchBar *) [viewRegistry objectForKeyedSubscript:reactTag];
