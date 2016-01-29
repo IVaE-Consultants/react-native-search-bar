@@ -4,7 +4,7 @@ React = require('react-native');
 
 RNSearchBar = React.requireNativeComponent('RNSearchBar', null);
 
-findNodeHandle = require('findNodeHandle');
+findNodeHandle = React.findNodeHandle;
 
 PropTypes = React.PropTypes;
 

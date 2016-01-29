@@ -31,6 +31,7 @@
   [_eventDispatcher sendTextEventWithType:RCTTextEventTypeFocus
                                  reactTag:self.reactTag
                                      text:searchBar.text
+                                     key: nil
                                eventCount:_nativeEventCount];
 }
 
@@ -41,6 +42,7 @@
   [_eventDispatcher sendTextEventWithType:RCTTextEventTypeChange
                                  reactTag:self.reactTag
                                      text:searchText
+                                     key: nil
                                      eventCount:_nativeEventCount];
 }
 
@@ -52,7 +54,7 @@
                           @"searchText": searchBar.text
                           };
 
-  [_eventDispatcher sendInputEventWithName:@"topTap" body:event];
+  [_eventDispatcher sendInputEventWithName:@"press" body:event];
 }
 
 
@@ -67,7 +69,7 @@
                           @"button": @"cancel"
                           };
 
-  [_eventDispatcher sendInputEventWithName:@"topTap" body:event];
+  [_eventDispatcher sendInputEventWithName:@"press" body:event];
 }
 
 @end
